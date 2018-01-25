@@ -1,33 +1,12 @@
-# Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements.  See the NOTICE file distributed with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to You under the Apache License, Version 2.0
-# (the "License"); you may not use this file except in compliance with
-# the License.  You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 language: java
-sudo: required
-
-jdk:
-  - oraclejdk8
-
-env:
-  - MAVEN_OPTS="-Xmx6g -Xms2g"
-
-# only build master and the MATH_3_X branch
-branches:
-  only:
-    - develop
-    - master
-    - MATH_3_X
-
+install:
+- bash install.sh
+script:
+- bash test.sh
+before_script:
+- bash pull.sh
 after_success:
-  - mvn clean test jacoco:report coveralls:report
+- bash push.sh
+env:
+  global:
+    secure: MxglDr5UqB6GmJ/k5Bd4DuMpitsZeqdT5n5cIOsXB3jqqB29FrXdXkRzJOMmMwyBU9yI3Wih0hd2nvr332mCi+6OEtxOh7zTwhu32P61WFnBEu2N26Li12sAhb0YynPHKvMgAwLRDLWxi6JuAxDympxUTG741S5eMVKvTgyc7m3lpMXI9s0cNV5fAphaDjQCmTsS8kjSNcOgmCrvtZV2lSeywTiV5RVZkHC9uftlWd8yGdGsKz+aoVFWqUGkeJ7PTopNIivWUr7/dwjR/LkJ7KCrDYpixU8jyzPVFZ6L3JicyBdIrQTOIgVQFc2iV1NeLetajBdabIXbaTyDvSxNlGuGlPmN/EZxMMxzzkiV5QnmL6n0v/3WYvE8Y+8fVf+hJzFJmfW0fVa8YBcwM+oG7gw2bEKGjaPNIffs3izSpu4pj+CCTq1wZGuRHGx+bns/kdF17sIY+MeCB6z/aYLY9GuPuvCMswnEmjD75qs0u2g/lDRL4myUe+Mqdd6EjP2HT4iYKW1riGDNpLLVBz4leuK59mQMTHxyTCV4Fm4KKEG2bJncfv4Ol8wJ0dju5kw5+sC3aLGceZyvnbve+Saxe53rh6k/BNqhz1Z+rHgXKGKfatBA8dmbqxvM2UgNiqoe4r3JGkssEmcjQ9j9oXokPu+DNGdZ8Vi8tvrV+crkmC0=
